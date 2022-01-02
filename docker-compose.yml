@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  megasaab: 
+    image: nginx
+    container_name: ${SSL_DOMAIN}_production
+    volumes:
+      - "./nginx.conf:/etc/nginx/nginx.conf"
+      - "${WEBSITE_PATH}:/var/www/static"
+    ports:
+      - "${PORT}:80"
+    networks:
+      - https
+    environment:
+      VIRTUAL_HOST: ${SSL_DOMAIN}
+      VIRTUAL_PORT: ${PORT}
+      LETSENCRYPT_HOST: ${SSL_DOMAIN}
+
+networks:
+  https:
+    external:
+      name: https_network
