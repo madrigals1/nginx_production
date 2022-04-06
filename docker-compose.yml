@@ -3,6 +3,7 @@ version: "3"
 services:
   megasaab: 
     image: nginx
+    restart: always
     container_name: ${SSL_DOMAIN}_production
     volumes:
       - "./nginx.conf:/etc/nginx/nginx.conf"
@@ -19,4 +20,4 @@ services:
 networks:
   https:
     external:
-      name: https_network
+      name: ${HTTPS_NETWORK}
