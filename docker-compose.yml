@@ -1,10 +1,10 @@
 version: "3"
 
 services:
-  megasaab: 
+  website:
     image: nginx
     restart: always
-    container_name: ${SSL_DOMAIN}_production
+    container_name: ${CONTAINER_NAME}
     volumes:
       - "./nginx.conf:/etc/nginx/nginx.conf"
       - "${WEBSITE_PATH}:/var/www/static"
@@ -12,10 +12,6 @@ services:
       - "${PORT}:80"
     networks:
       - https
-    environment:
-      VIRTUAL_HOST: ${SSL_DOMAIN}
-      VIRTUAL_PORT: ${PORT}
-      LETSENCRYPT_HOST: ${SSL_DOMAIN}
 
 networks:
   https:
